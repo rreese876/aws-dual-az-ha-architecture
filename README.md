@@ -18,7 +18,7 @@ with strict network isolation, private application tiers, and fault tolerance.
 - Designed for fast AZ-level failover
 
 ## Architecture Diagram
-![Architecture](./architecture_diagram.png)
+![Architecture](./diagrams/architecture_diagram.png)
 
 ## Build Steps
 - Step 1: VPC & Networking (Dual AZ)
