@@ -17,6 +17,12 @@ with strict network isolation, private application tiers, and fault tolerance.
 - Metadata synchronization via S3
 - Designed for fast AZ-level failover
 
+## Key Design Goals
+- **High Availability**: Active/Standby across 2 AZs with continuous metadata sync
+- **Security**: Akamai WAF → Internet Gateway → private subnets only
+- **HIPAA-aligned**: No PHI traverses public subnets; EBS encryption at rest
+- **Cost-optimized**: S3 Standard-IA for cold archive; 25% runtime standby EC2s
+
 ## Architecture Diagram
 ![Architecture](./diagrams/architecture_diagram.png)
 
