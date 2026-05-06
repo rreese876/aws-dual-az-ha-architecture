@@ -9,14 +9,14 @@ resource "aws_vpc" "pacs_vpc" {
 # AZ1 - Primary
 resource "aws_subnet" "az1_private" {
   vpc_id            = aws_vpc.pacs_vpc.id
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = "10.0.10.0/24"
   availability_zone = "us-east-1a"
   tags = { Name = "az1-private-pacs" }
 }
 
 resource "aws_subnet" "az1_public" {
   vpc_id            = aws_vpc.pacs_vpc.id
-  cidr_block        = "10.0.2.0/24"
+  cidr_block        = "10.0.20.0/24"
   availability_zone = "us-east-1a"
   tags = { Name = "az1-public" }
 }
@@ -24,7 +24,7 @@ resource "aws_subnet" "az1_public" {
 # AZ2 - Standby
 resource "aws_subnet" "az2_private" {
   vpc_id            = aws_vpc.pacs_vpc.id
-  cidr_block        = "10.0.3.0/24"
+  cidr_block        = "10.0.30.0/24"
   availability_zone = "us-east-1b"
   tags = { Name = "az2-private-pacs" }
 }
