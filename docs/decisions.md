@@ -35,3 +35,25 @@ all PACS node types per AZ.
 **Alternative considered:** VPN only — rejected, insufficient bandwidth 
 and latency guarantees for DICOM image transfer at scale.
 **Failover:** Site-to-Site VPN configured as backup if Direct Connect fails.
+
+## ADR-006: Colocation rack at Rackspace for Direct Connect termination
+**Decision:** Physical network hardware hosted in Rackspace colo rack
+**Reason:** AWS Direct Connect requires a physical cross connect between 
+the customer router and the AWS DX router cage inside an 
+AWS Direct Connect location. Rackspace provides the facility, 
+rack space, and cross connect provisioning.
+
+**Hardware in rack:**
+- Customer edge router (BGP ASN 65000)
+- Firewall/security appliance
+- Layer 2 aggregation switch
+- Cross connect to AWS DX router cage
+
+**Two VIFs provisioned:**
+- Private VIF (VLAN 100) → VGW → pacs-ha-vpc 
+  (carries DICOM :104, HL7 :2575, viewer :443)
+- Public VIF (VLAN 200) → S3 
+  (DICOM archive writes never traverse public internet — HIPAA aligned)
+
+**VPN failover:** Site-to-Site VPN configured as backup path 
+if Direct Connect or colo hardware fails.
