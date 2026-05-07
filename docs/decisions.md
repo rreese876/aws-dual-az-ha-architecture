@@ -25,3 +25,13 @@ development phase.
 **Reason:** AWS reserves 5 IPs per subnet (network address, VPC router, 
 DNS resolver, future use, broadcast). /24 gives comfortable room for 
 all PACS node types per AZ.
+
+## ADR-005: Direct Connect for on-prem hospital connectivity
+**Decision:** Use AWS Direct Connect with VPN failover
+**Reason:** Three on-prem use cases require dedicated connectivity:
+  1. CT/MRI modalities sending DICOM over :104 — need consistent low latency
+  2. Epic/Cerner HL7 feeds to cloud EIS — need reliable bandwidth
+  3. Radiologist workstations retrieving images — latency-sensitive
+**Alternative considered:** VPN only — rejected, insufficient bandwidth 
+and latency guarantees for DICOM image transfer at scale.
+**Failover:** Site-to-Site VPN configured as backup if Direct Connect fails.
